@@ -1,0 +1,41 @@
+{
+  "development": {
+    "username": "shuffler",
+    "password": "password1",
+    "database": "testing8",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "options": {
+      "operatorsAliases": false,
+      "logging": false,
+      "define": {
+        "schema": "shuffler",
+        "underscored": true
+      }
+    },
+    "migrationStorageTableName": { "tableName": "sequelize_meta",
+      "schema": "shuffler"
+    }
+  },
+  "test": {
+    "use_env_variable": "url",
+    "options": {
+      "operatorsAliases": false,
+      "logging": false,
+      "define": {
+        "schema": "shuffler",
+        "underscored": true
+      }
+    },
+    "migrationStorageTableName": { "tableName": "sequelize_meta",
+      "schema": "shuffler"
+    }
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

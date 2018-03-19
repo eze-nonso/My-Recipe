@@ -1,0 +1,4 @@
+--ui tdd
+--require babel-register
+--recursive
+-w
