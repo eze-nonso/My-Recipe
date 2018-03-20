@@ -30,8 +30,7 @@ export default {
     })
   ),
   down: (queryInterface, Sequelize) =>
-    queryInterface.dropTable({
-    tableName: 'ingredients',
-    schema: 'shuffler'
+    queryInterface.dropTable('ingredients', {
+      schema: 'shuffler'
     })
 };

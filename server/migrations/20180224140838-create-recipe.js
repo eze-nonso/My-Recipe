@@ -49,14 +49,21 @@ export default {
       'schema': 'shuffler',
     })
     .then(() =>
-      queryInterface.addConstraint('shuffler.recipes', [
+      queryInterface.addConstraint({
+        tableName: 'recipes',
+        schema: 'shuffler',
+      }, [
         'name', 'direction'
       ], {
         type: 'unique',
+        name: 'recipes_name_direction_uk',
       })
     )
     .then(() =>
-      queryInterface.addConstraint('shuffler.recipes', [
+      queryInterface.addConstraint({
+        tableName: 'recipes',
+        schema: 'shuffler',
+      }, [
         'user_id'
       ], {
         type: 'foreign key',
