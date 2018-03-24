@@ -24,6 +24,7 @@ export default (sequelize, DataTypes) => {
     }
   }, {
     // schema: 'shuffler',
+    // underscored: true,
     indexes: [
       {
         unique: true,
@@ -32,7 +33,7 @@ export default (sequelize, DataTypes) => {
         ],
       }
     ],
-    // underscored: true
+
   });
 
   Recipe.associate = models => {

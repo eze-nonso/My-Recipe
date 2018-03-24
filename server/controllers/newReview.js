@@ -7,7 +7,7 @@ export default (req, res, next) =>
       comment: req.body.review,
       star: req.body.star || null,
       user_id: req.session.user,
-      recipe_id: req.params['recipeId'],
+      recipe_id: parseInt(req.params['recipeId']),
     }, {
       fields: ['comment', 'star', 'recipe_id', 'user_id'],
       returning: true,
