@@ -31,7 +31,7 @@ for (let j = 0; j <= 19; j ++) {
   recipes.push({
     name: faker.lorem.words(),
     direction: faker.lorem.text(),
-    per_serving: faker.random.number(4),
+    per_serving: Math.floor(Math.random() * 4) + 1,
     user_id: Math.floor(Math.random() * 5) + 1,
     created_at: faker.date.past(),
     updated_at: faker.date.recent(),
@@ -45,9 +45,9 @@ populate({
   getData: () => (
     {
       comment: faker.lorem.paragraphs(),
-      star: faker.random.number(5),
-      user_id: faker.random.number(5),
-      recipe_id: faker.random.number(20),
+      star: Math.floor(Math.random() * 5) + 1,
+      user_id: Math.floor(Math.random() * 5) + 1,
+      recipe_id: Math.floor(Math.random() * 20) + 1,
       created_at: faker.date.past(),
       updated_at: faker.date.recent(),
     }
@@ -64,8 +64,8 @@ populate({
       qty: faker.fake('{{random.number(4)}}.{{random.number(5)}} {{lorem.word}}'),
       created_at: faker.date.past(),
       updated_at: faker.date.recent(),
-      ingredient_id: faker.random.number(30),
-      recipe_id: faker.random.number(20),
+      ingredient_id: Math.floor(Math.random() * 30) + 1,
+      recipe_id: Math.floor(Math.random() * 20) + 1,
     }
   ),
   fkey_1: 'ingredient_id',
