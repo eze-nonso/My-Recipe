@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
   const Quantity = sequelize.define('quantity', {
-    name: {
+    qty: {
       type: DataTypes.STRING,
       allowNull: false
     }

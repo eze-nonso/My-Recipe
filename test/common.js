@@ -5,6 +5,7 @@ import Umzug from 'umzug';
 import {sequelize} from '../server/models';
 import path from 'path';
 
+
 chai.use(chaiHttp);
 const should = chai.should();
 const expect = chai.expect;
@@ -45,33 +46,6 @@ export default {
   chai, app, should, expect, assert, umzugSeed, umzugMigrate, populateDB
 };
 
-
-
-setup('Run seeds', function() {
-  this.timeout(0);
-  return umzugMigrate.executed()
-  .then(executed =>
-    executed.length
-    ? umzugMigrate.down({
-      to: 0
-    })
-    : undefined
-  )
-  .then(() => umzugMigrate.up())
-  .then(() =>
-    umzugSeed.up()
-  );
-});
-
-
-teardown('Down seeds', function() {
-  this.timeout(0);
-  return umzugMigrate.down(
-    {
-      to: 0
-    }
-  );
-});
 
 
 // function to create a user and a recipe we plan to use often
