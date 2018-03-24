@@ -5,7 +5,6 @@ app.set('port', parseInt(process.env['PORT']) || 8000);
 
 Promise.resolve()
 .then(() => {
-  // jump for env test since test handles its own database setup
   if (process.env.NODE_ENV === 'test') throw new Error();
 })
 // execute pending migrations

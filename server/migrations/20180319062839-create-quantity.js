@@ -1,8 +1,7 @@
 export default {
-
   up: (queryInterface, Sequelize) =>
      queryInterface.createTable('quantities', {
-      qty: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -36,13 +35,10 @@ export default {
         onUpdate: 'cascade'
       }
     }, {
-      schema: 'shuffler',
+      schema: 'shuffler'
     })
     .then(() =>
-      queryInterface.addConstraint({
-        tableName: 'quantities',
-        schema: 'shuffler',
-      }, [
+      queryInterface.addConstraint('shuffler.quantities', [
         'ingredient_id',
         'recipe_id'
       ], {
@@ -57,7 +53,6 @@ export default {
         'ingredient_id'
       ], {
         type: 'foreign key',
-        name: 'quantities_ingredient_id_fkey',
         references: {
           table: {
             tableName: 'ingredients',

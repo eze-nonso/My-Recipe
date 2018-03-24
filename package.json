@@ -5,8 +5,7 @@
   "scripts": {
     "test": "mocha",
     "start:serve": "nodemon --exec \"babel-node\" ./bin/www",
-    "lint": "eslint",
-    "seq": "sequelize"
+    "lint": "eslint"
   },
   "author": "eze",
   "license": "ISC",
@@ -19,7 +18,6 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "faker": "^4.1.0",
     "nodemon": "^1.15.1",
     "umzug": "^2.1.0"
   },
@@ -38,5 +36,10 @@
   "keywords": [
     "sequelize",
     "postgres"
-  ]
+  ],
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
 }
