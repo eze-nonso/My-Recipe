@@ -58,7 +58,6 @@ const umzug = new Umzug({
   storageOptions: {
     sequelize,
     tableName: 'sequelize_meta',
-    schema: config.options.schema || undefined,
   }
 });
 

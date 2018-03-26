@@ -12,7 +12,7 @@ export const quantities = [];
 for (let i = 0; i <= 4; i ++) {
 
   users.push({
-    username: faker.internet.userName(),
+    username: faker.internet.userName().slice(0, 50),
     password: faker.internet.password(),
     email: faker.internet.email(),
     created_at: faker.date.between(2017, '2018-02-19T19:45:11.890Z'),

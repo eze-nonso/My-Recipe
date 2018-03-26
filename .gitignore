@@ -1,6 +1,7 @@
-<<<<<<< HEAD
-# ignore node_modules
-=======
 # Exclude node_modules
->>>>>>> update-seed
+
 node_modules/
+
+# Exclude .env
+
+.env

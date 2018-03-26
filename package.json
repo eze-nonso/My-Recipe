@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start:serve": "nodemon --exec \"babel-node\" ./bin/www",
+    "start:serve": "nodemon -r dotenv/config bin/bootstrap",
+    "start:serve2": "nodemon -r dotenv/config ./node_modules/babel-cli/bin/babel-node ./bin/www",
     "lint": "eslint",
     "seq": "sequelize"
   },
@@ -20,6 +21,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "faker": "^4.1.0",
+    "mocha": "^5.0.5",
     "nodemon": "^1.15.1",
     "umzug": "^2.1.0"
   },
@@ -27,7 +29,9 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "cookie-session": "^2.0.0-beta.3",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",

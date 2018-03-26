@@ -1,4 +1,4 @@
-import {recipe as Recipe, review as Review, Sequelize} from '../models';
+import { recipe as Recipe, review as Review, Sequelize } from '../models';
 
 const Op = Sequelize.Op;
 export default (req, res, next) =>
@@ -11,7 +11,7 @@ export default (req, res, next) =>
         'star': {
           [Op.gt]: 2
         },
-        user_id: req.params['userId'] // analogous to including User
+        user_id: parseInt(req.params['userId']) // analogous to including User
       },
       attributes: [],
     }]

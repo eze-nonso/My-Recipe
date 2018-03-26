@@ -1,4 +1,6 @@
-import {recipe as Recipe} from '../models';
+import {
+  recipe as Recipe, ingredient as Ingredient, review as Review,
+} from '../models';
 
 export default (req, res, next) => {
   // check if logged in
@@ -6,7 +8,12 @@ export default (req, res, next) => {
     Recipe.all({
       attributes: {
         exclude: ['createdAt', 'updatedAt', 'user_id'],
-      }
+      },
+      include: [{
+        model: Ingredient,
+      }, {
+        model: Review,
+      }],
     })
     .then(recipes =>
       res.send(recipes)

@@ -14,16 +14,12 @@ export default (req, res, next) => {
         });
       }
       // if no user, redirect? and break chain
-      res.status(403).send({
-        status: 'fail, signin or signup'
-      });
-      throw new Error('noUser');
+      throw ('no such User in database');
     })
     .then(recipes => {
       if (!recipes[0]) {
         // if no recipe found, break chain
-        res.status(400).send({status: 'fail', message: `user ${userId} has no recipe ${recipeId}`});
-        throw new Error('Recipe not found');
+        throw (`user ${userId} has no recipe ${recipeId}`);
       }
       let recipe = recipes[0];
       return Promise.all([
@@ -31,23 +27,23 @@ export default (req, res, next) => {
         recipe
       ]);
     })
-    .then(([deleted, recipe]) => {
+    .then(([deleted, recipe]) =>
       // on success
-      delete recipe.dataValues['created_at'];
-      delete recipe.dataValues['updated_at'];
-      delete recipe.dataValues['user_id'];
       res.send({
         status: `recipe ${recipeId} removed`, deleted: recipe
-      });
-    })
+      })
+    )
     .catch(err => {
-      if (err.message !== 'noUser') {
-        if (res.writable) {
-          res.status(500).send({status: 'fail', [err.name]: err.message});
-        } else {
-          console.error('\nserver error:\n', err);
+      if (res.writable) {
+        if (!(e instanceof Error)) {
+          return res.status(400).send({
+            status: 'fail',
+            error: e,
+          });
         }
+        res.status(500).send({status: 'fail', [e.name]: e.message});
       }
+      console.error('\ncaught error:\n', e);
     })
   } else {
     // redirect to login if unset cookie

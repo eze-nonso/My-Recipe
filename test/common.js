@@ -4,7 +4,7 @@ import app from '../app';
 import Umzug from 'umzug';
 import {sequelize} from '../server/models';
 import path from 'path';
-
+import faker from 'faker';
 
 chai.use(chaiHttp);
 const should = chai.should();
@@ -22,9 +22,9 @@ const umzugMigrate = new Umzug({
   },
   storage: 'sequelize',
   storageOptions: {
+    // setup sequelize instance provides storage options including schema
     sequelize,
     tableName: 'sequelize_meta',
-    schema: 'shuffler'
   }
 });
 
@@ -43,29 +43,43 @@ const umzugSeed = new Umzug({
 
 
 export default {
-  chai, app, should, expect, assert, umzugSeed, umzugMigrate, populateDB
+  chai, app, should, expect, assert, umzugSeed, umzugMigrate, populateDB,
 };
 
 
 
 // function to create a user and a recipe we plan to use often
 function populateDB(...args) {
-  // should take agent as arg, to resend coookie on create recipe
+  // should always take agent as arg, to resend coookie on create recipe
   const agent = args[0];
   return agent.post('/api/users/signup')
   .type('form')
   .send({
-    username: 'newUser',
-    email: 'new@user.com',
-    password: 'new'
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(),
   })
   .then(() =>
     agent.post('/api/recipes')
     .type('form')
     .send({
-      name: 'Quinox',
-      direction: 'Stir as desired',
-      per_serving: 2
+      name: faker.lorem.word(),
+      direction: faker.lorem.paragraphs(),
+      per_serving: faker.fake('{{random.number(3)}}.{{random.number(5)}}'),
+      ingredients: [
+        {
+          [faker.lorem.word()]: faker.fake('{{random.number(4)}}.{{random.number(5)}} {{lorem.word}}')
+        },
+        {
+          [faker.lorem.word()]: faker.fake('{{random.number(4)}}.{{random.number(5)}} {{lorem.word}}')
+        },
+        {
+          [faker.lorem.word()]: faker.fake('{{random.number(4)}}.{{random.number(5)}} {{lorem.word}}')
+        },
+        {
+          [faker.lorem.word()]: faker.fake('{{random.number(4)}}.{{random.number(5)}} {{lorem.word}}')
+        },
+      ]
     })
   );
 }

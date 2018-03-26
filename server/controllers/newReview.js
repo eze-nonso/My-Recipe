@@ -32,8 +32,10 @@ export default (req, res, next) =>
   )
   : req.session.user
   ? res.status(400).send({
-    status: 'fail, review cannot be empty'
+    status: 'fail',
+    error: 'review cannot be empty'
   })
   : res.status(403).send({
-    status: 'fail, login or signup'
+    status: 'fail',
+    error: 'login or signup'
   })

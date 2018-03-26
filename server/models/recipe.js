@@ -38,14 +38,12 @@ export default (sequelize, DataTypes) => {
 
   Recipe.associate = models => {
     // associations here
-    Recipe.belongsTo(models['user'], {
-      foreignKey: 'user_id'
-    });
+    Recipe.belongsTo(models['user']);
 
     Recipe.hasMany(models['review']);
 
     Recipe.belongsToMany(models['ingredient'], {
-      through: models['quantity']
+      through: models['quantity'],
     });
   }
 
