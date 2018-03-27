@@ -33,6 +33,8 @@ populate({
   getData: () => (
     {
       name: faker.lorem.word(),
+      created_at: faker.date.between(2017, '2018-02-19T19:45:11.890Z'),
+      updated_at: faker.date.recent(),
     }
   ),
   fkey_1: 'name',
