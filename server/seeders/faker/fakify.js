@@ -9,37 +9,56 @@ export const ingredients = [];
 export const quantities = [];
 
 // populate users(5)
-for (let i = 0; i <= 4; i ++) {
-
-  users.push({
-    username: faker.internet.userName().slice(0, 50),
-    password: faker.internet.password(),
-    email: faker.internet.email(),
-    created_at: faker.date.between(2017, '2018-02-19T19:45:11.890Z'),
-    updated_at: faker.date.recent(),
-  });
-
-}
+// 5
+populate({
+  table: users,
+  count: 5,
+  getData: () => (
+    {
+      username: faker.internet.userName().slice(0, 50),
+      password: faker.internet.password(),
+      email: faker.internet.email(),
+      created_at: faker.date.between(2017, '2018-02-19T19:45:11.890Z'),
+      updated_at: faker.date.recent(),
+    }
+  ),
+  fkey_1: 'username',
+})
 
 // populate ingredients(30)
-for (let i = 0; i <= 29; i ++) {
-  ingredients.push(faker.lorem.word());
-}
+// 30
+populate({
+  table: ingredients,
+  count: 30,
+  getData: () => (
+    {
+      name: faker.lorem.word(),
+    }
+  ),
+  fkey_1: 'name',
+})
 
 // populate recipes(20)
-for (let j = 0; j <= 19; j ++) {
-  recipes.push({
-    name: faker.lorem.words(),
-    direction: faker.lorem.text(),
-    per_serving: Math.floor(Math.random() * 4) + 1,
-    user_id: Math.floor(Math.random() * 5) + 1,
-    created_at: faker.date.past(),
-    updated_at: faker.date.recent(),
+// 20
+populate({
+  table: recipes,
+  getData: () => (
+    {
+      name: faker.lorem.words(),
+      direction: faker.lorem.text(),
+      per_serving: Math.floor(Math.random() * 4) + 1,
+      user_id: Math.floor(Math.random() * 5) + 1,
+      created_at: faker.date.past(),
+      updated_at: faker.date.recent(),
+    }
+  ),
+  fkey_1: 'name',
+  fkey_2: 'direction',
+})
 
-  })
-}
 
 // populate reviews
+// 20
 populate({
   table: reviews,
   getData: () => (
@@ -57,8 +76,10 @@ populate({
 })
 
 // populate quantities
+// 20 * 30
 populate({
   table: quantities,
+  count: 20 * 30,
   getData: () => (
     {
       qty: faker.fake('{{random.number(4)}}.{{random.number(5)}} {{lorem.word}}'),
@@ -75,20 +96,33 @@ populate({
 
 function populate(
   {
-    table, count = 20, fkey_1, fkey_2, getData,
+    table, fkey_1, getData, fkey_2, count = 20,
   }
 ) {
-  const recur = () => {
+  function recur() {
     let duplicate;
     let data = getData();
 
     table.forEach((item) => {
-      if (data[fkey_1] === item[fkey_1] && data[fkey_2] === item[fkey_2]) duplicate = true;
+      if (
+        data[fkey_1] === item[fkey_1] &&
+        (
+          fkey_2
+          ? data[fkey_2] === item[fkey_2]
+          : true
+        )
+      ) {
+        duplicate = true;
+      }
     });
 
-    if (duplicate) return recur();
-    table.push(data);
-    if (table.length >= count) return;
+    if (!duplicate) {
+      table.push(data);
+    }
+
+    if (table.length < count) {
+      return recur();
+    }
   };
-  recur();
+  return recur();
 }

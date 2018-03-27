@@ -28,9 +28,6 @@ export function createOrUpdate(recipe, ingredientArray, t,) {
         where: {
           name: ingName,
         },
-        defaults: {
-          name: ingName,
-        },
         transaction: t || null,
       })
       .then(([ing]) => {

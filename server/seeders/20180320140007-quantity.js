@@ -1,26 +1,19 @@
-'use strict';
+import {quantities} from './faker/fakify';
 
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+export default {
+  up: (queryInterface, Sequelize) =>
+    queryInterface.bulkInsert(
+      {
+        tableName: 'quantities',
+        schema: 'shuffler',
+      }, quantities
+    ),
 
-      Example:
-      return queryInterface.bulkInsert('Person', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
-  },
-
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('Person', null, {});
-    */
-  }
+  down: (queryInterface, Sequelize) =>
+    queryInterface.bulkDelete(
+      {
+        tableName: 'quantities',
+        schema: 'shuffler',
+      }
+    )
 };
