@@ -287,10 +287,61 @@ suite('Post review for recipe', function() {
 })
 
 
-suite('Get favorite recipe', function() {
+suite.skip('Get favorite recipe', function() {
 
   suite('GET /api/users/:userId/recipes', function() {
 
-    test('Allow logged in user to get favorite recipe')
+    test('Allow logged in user to get favorite recipes', function() {
+      return populateDB(agent)
+      .then(res => {
+        return agent.get('/api/users/5')
+      })
+    })
   })
 })
+
+
+suite('Get recipes with the most upvotes', function () {
+
+  suite('GET /api/recipes?sort=upvotes&order=ascending', function () {
+
+    test('Expect to respond with error status code for user not logged in', function () {
+
+      return populateDB(agent)
+      .then(() => {
+        return requester.get('/api/recipes?sort=upvotes&order=ascending');
+      })
+      .then(res => {
+        expect.fail(res.status, 403, 'Expected error status code on request by user not logged in');
+      })
+      .catch(e => {
+        if (e.response) {
+          return e.response;
+        }
+        throw e;
+      })
+      .then(res => {
+        expect(res).to.be.json;
+        expect(res).to.have.status(403);
+        expect(res.body).to.have.all.keys('status', 'error');
+        expect(res.body).to.have.property('error').that.is.a('string');
+      });
+    });
+
+
+    test('Expect success on request by logged in user', function() {
+      return populateDB(agent)
+      .then(() => {
+        return agent.get('/api/recipes?sort=upvotes&order=ascending');
+      })
+      .then(res => {
+        expect(res.body).to.be.an.instanceof(Array);
+        // deep equal
+        expect(res.body).to.be.an('array').with.lengthOf(5);
+        console.log(res.body[3].upvotes)
+        console.log(res.body)
+        expect(res.body[3]).to.have.property('upvotes').to.be.at.most(res.body[2].upvotes);
+      });
+    });
+  });
+});

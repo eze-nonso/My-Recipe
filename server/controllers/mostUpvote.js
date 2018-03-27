@@ -24,7 +24,8 @@ export default (req, res, next) => {
   // .then(recipes => res.send(recipes))
 
   if (!req.session.user) return res.status(403).send({
-   status: 'fail, signin or signup'
+   status: 'fail',
+   error: 'signin or signup',
   });
   // works generally, apart from double nesting result
   return Review.all({
