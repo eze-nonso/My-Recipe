@@ -60,9 +60,10 @@ populate({
 
 
 // populate reviews
-// 20
+// 35
 populate({
   table: reviews,
+  count: 35,
   getData: () => (
     {
       comment: faker.lorem.paragraphs(),
@@ -76,7 +77,7 @@ populate({
   fkey_1: 'user_id',
   fkey_2: 'recipe_id',
 })
-console.log(reviews)
+
 // populate quantities
 // 20 * 30
 populate({
