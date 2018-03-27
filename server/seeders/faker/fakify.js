@@ -76,7 +76,7 @@ populate({
   fkey_1: 'user_id',
   fkey_2: 'recipe_id',
 })
-
+console.log(reviews)
 // populate quantities
 // 20 * 30
 populate({

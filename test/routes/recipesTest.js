@@ -338,7 +338,6 @@ suite('Get recipes with the most upvotes', function () {
         expect(res.body).to.be.an.instanceof(Array);
         // deep equal
         expect(res.body).to.be.an('array').with.lengthOf(5);
-        console.log(res.body[3].upvotes)
         console.log(res.body)
         expect(res.body[3]).to.have.property('upvotes').to.be.at.most(res.body[2].upvotes);
       });

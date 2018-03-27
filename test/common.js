@@ -64,7 +64,7 @@ function populateDB(...args) {
     .type('form')
     .send({
       name: faker.lorem.word(),
-      direction: faker.lorem.paragraphs(),
+      direction: faker.lorem.text(),
       per_serving: faker.fake('{{random.number(3)}}.{{random.number(5)}}'),
       ingredients: [
         {
