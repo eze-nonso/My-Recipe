@@ -28,7 +28,10 @@ suite('Adding recipe', function() {
         assert.fail(res.status, 403, 'Expected an error status code on posting by user not logged in');
       })
       .catch(e => {
-        if (e.response) return e.response;
+        if (e.response) {
+          return e.response;
+        }
+        throw e;
       })
       .then((res) => {
         if (res) {
@@ -90,6 +93,7 @@ suite('Modifying recipe', function() {
         res.should.have.status(200);
         res.body.recipe.should.include.keys('id', 'direction', 'name', 'updated_at', 'created_at', 'per_serving');
         res.body.should.have.own.property('status');
+        expect(res.body.recipe).to.have.property('direction').equal('No need to stir');
       });
     });
   });
@@ -149,7 +153,9 @@ suite('Deleting recipe', function() {
           assert.fail(res.status, 403, 'Expected an error code on request by not logged in user');
         })
         .catch(e => {
-          if (e.response) return e.response;
+          if (e.response) {
+            return e.response;
+          }
           throw e;
         })
         .then(res => {
@@ -197,7 +203,9 @@ suite('Get all recipes', function() {
         assert.fail(res.status, 403, 'Expected an error status code for request from user not logged in');
       })
       .catch(e => {
-        if (e.response) return e.response;
+        if (e.response) {
+          return e.response;
+        }
         throw e;
       })
       .then(res => {
@@ -230,7 +238,9 @@ suite('Post review for recipe', function() {
       })
       .then(res => assert.fail(res.status, 403, 'expected error response code'))
       .catch(e => {
-        if (e.response) return e.response;
+        if (e.response) {
+          return e.response;
+        }
         throw e;
       })
       .then(res => {
@@ -255,7 +265,9 @@ suite('Post review for recipe', function() {
         expect.fail(res.status, 403, 'expected error status code');
       })
       .catch(e => {
-        if (e.response) return e.response;
+        if (e.response) {
+          return e.response;
+        }
         throw e;
       })
       .then(res => {
@@ -283,22 +295,47 @@ suite('Post review for recipe', function() {
         expect(res.body).to.have.property('status', 'review added');
       });
     });
-  })
-})
+  });
+});
 
 
-suite.skip('Get favorite recipe', function() {
+suite('Get favorite recipe', function() {
 
-  suite('GET /api/users/:userId/recipes', function() {
+  suite('GET /api/users/recipes', function() {
 
-    test('Allow logged in user to get favorite recipes', function() {
-      return populateDB(agent)
+    test('Expect logged in user to get favorite recipes', function() {
+
+      // agent cached cookie from last call
+      return agent.get('/api/users/recipes')
       .then(res => {
-        return agent.get('/api/users/5')
+        expect(res).to.be.json;
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        expect(res.body).to.be.empty;
+      });
+    });
+
+    test('Expect error response on request by user not logged in', function () {
+
+      return requester.get('/api/users/recipes')
+      .then(res => {
+        expect.fail(res.status, 403, 'Expected error response code');
       })
-    })
-  })
-})
+      .catch(e => {
+        if (e.response) {
+          return e.response;
+        }
+        throw e;
+      })
+      .then(res => {
+        expect(res).to.be.json;
+        expect(res).to.have.status(403);
+        expect(res.body).to.be.an('object').with.property('error').that.is.a('string');
+        expect(res.body).to.have.property('status').that.is.a('string');
+      });
+    });
+  });
+});
 
 
 suite('Get recipes with the most upvotes', function () {
@@ -307,10 +344,7 @@ suite('Get recipes with the most upvotes', function () {
 
     test('Expect to respond with error status code for user not logged in', function () {
 
-      return populateDB(agent)
-      .then(() => {
-        return requester.get('/api/recipes?sort=upvotes&order=ascending');
-      })
+      return  requester.get('/api/recipes?sort=upvotes&order=ascending')
       .then(res => {
         expect.fail(res.status, 403, 'Expected error status code on request by user not logged in');
       })
@@ -343,6 +377,7 @@ suite('Get recipes with the most upvotes', function () {
         // check order is desc
         expect(res.body[1]).to.have.property('upvotes').at.most(res.body[3].upvotes);
 
+        expect(res.body[2]).to.have.property('recipe').that.is.an('object').with.property('id');
       });
     });
 

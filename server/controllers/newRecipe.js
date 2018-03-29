@@ -65,24 +65,13 @@ export default (req, res, next) => {
       });
     })
 
-    .catch(err => {
-      console.log(err)
-      if (res.writable) {
-        try {
-          res.status(500).send({
-            status: `fail, ${err.message === 'Validation error'
-            ? 'sorry, recipe already exists'
-            : 'check "direction" and "name" have been provided, or login again'}`,
-            [err.name]: err.message
-          });
-        } catch (e) {
-          console.error('server error: \n', err);
-          res.status(500).send({error: err.message});
-        }
-      } else {
-        console.error('\nserver error: \n', err);
-      }
-    })
+    .catch(e =>
+      res.writable
+      ? res.status(500).send({
+        [e.name]: e.message
+      })
+      : console.error(e)
+    )
   } else {
     // better a redirect when applicable, or serve login page
     res.status(403).send({

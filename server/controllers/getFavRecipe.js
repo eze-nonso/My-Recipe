@@ -18,3 +18,10 @@ export default (req, res, next) =>
   .then(recipes =>
     res.send(recipes)
   )
+  .catch(e =>
+    res.writable
+    ? res.status(500).send({
+      [e.name]: e.message
+    })
+    : console.error(e)
+  )
