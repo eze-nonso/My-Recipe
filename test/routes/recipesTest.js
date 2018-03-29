@@ -347,18 +347,18 @@ suite('Get recipes with the most upvotes', function () {
     });
 
     test('Expect returned most upvotes to be in descending order', function () {
-      populateDB(agent)
+      return populateDB(agent)
       .then(() => {
         return agent.get('/api/recipes?sort=upvotes&order=descending')
-        .then(res => {
-          expect(res).to.be.json;
-          expect(res).status(200);
-          expect(res.body).to.be.an('array');
-          expect(res.body).to.have.lengthOf(5);
-          expect(res.body[0]).to.have.property('upvotes').that.is.a('number');
-          expect(res.body[4].upvotes).to.be.at.most(res.body[0].upvotes);
-        })
       })
-    })
+      .then(res => {
+        expect(res).to.be.json;
+        expect(res).status(200);
+        expect(res.body).to.be.an('array');
+        expect(res.body).to.have.lengthOf(5);
+        expect(res.body[0]).to.have.property('upvotes').that.is.a('number');
+        expect(res.body[4].upvotes).to.be.at.most(res.body[0].upvotes);
+      });
+    });
   });
 });
