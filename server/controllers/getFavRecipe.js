@@ -10,7 +10,7 @@ export default (req, res, next) =>
         'star': {
           [Op.gt]: 2
         },
-        user_id: parseInt(req.params['userId']) // analogous to including User
+        user_id: parseInt(req.session.user) // analogous to including User
       },
       attributes: [],
     }]

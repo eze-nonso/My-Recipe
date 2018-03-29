@@ -39,7 +39,11 @@ export default (req, res, next) => {
       model: Recipe,
     }],
     group: ['recipe.id'],
-    order: [[sequelize.fn('count', sequelize.col('*')), 'DESC']],
+    order: [
+      [
+        sequelize.fn('count', sequelize.col('*')), req.query.order,
+      ]
+    ],
     limit: 5
   })
   .then(reviews => res.send(reviews))

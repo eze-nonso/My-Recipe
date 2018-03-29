@@ -335,12 +335,30 @@ suite('Get recipes with the most upvotes', function () {
         return agent.get('/api/recipes?sort=upvotes&order=ascending');
       })
       .then(res => {
+        expect(res).to.be.json;
+        expect(res).to.have.status(200);
         expect(res.body).to.be.an.instanceof(Array);
         // deep equal
         expect(res.body).to.be.an('array').with.lengthOf(5);
-        console.log(res.body)
-        expect(res.body[3]).to.have.property('upvotes').to.be.at.most(res.body[2].upvotes);
+        // check order is desc
+        expect(res.body[1]).to.have.property('upvotes').at.most(res.body[3].upvotes);
+
       });
     });
+
+    test('Expect returned most upvotes to be in descending order', function () {
+      populateDB(agent)
+      .then(() => {
+        return agent.get('/api/recipes?sort=upvotes&order=descending')
+        .then(res => {
+          expect(res).to.be.json;
+          expect(res).status(200);
+          expect(res.body).to.be.an('array');
+          expect(res.body).to.have.lengthOf(5);
+          expect(res.body[0]).to.have.property('upvotes').that.is.a('number');
+          expect(res.body[4].upvotes).to.be.at.most(res.body[0].upvotes);
+        })
+      })
+    })
   });
 });
