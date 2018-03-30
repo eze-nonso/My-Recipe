@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- load style from filesystem in event of CDN failure -->
+    <link rel='stylesheet' href='../../../../Reserved Project files\bootstrap-4.0.0-beta.2\dist\css\bootstrap.min.css'>
+    <!-- end of load -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>New More Recipe</title>
+  </head>
+  <body>
+
+    <header class='mb-3'>
+      <nav class='navbar navbar-dark navbar-expand-lg bg-dark' style='min-height:10vmax;'>
+        <div class='container'>
+          <button class='navbar-toggler' type='button' data-target='#navMenu' data-toggle='collapse' id='togButton' aria-expanded='false' aria-controls='navMenu'>
+          <span class='navbar-toggler-icon'></span>
+          </button>
+          <a href='#' class='navbar-brand'>La Cuisine</a>
+          <div class='collapse navbar-collapse' id='navMenu' aria-labelledby='togButton'>
+            <ul class='navbar-nav'>
+              <!-- Use JavaScript to disable links -->
+              <li class='nav-item'>
+                <a href='#1' class='nav-link disabled'>Logout</a>
+              </li>
+              <li class='nav-item'>
+                <a href='#2' class='nav-link disabled'>My Account</a>
+              </li>
+              <li class='nav-item'>
+                <a href='#3' class='nav-link' id='Sign-in' data-toggle='collapse' data-target='#acctDiv' aria-controls='acctDiv' aria-expanded='false'>Sign In</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+
+
+
+    <main>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-4 col-10 mb-4 mb-md-0'>
+            <p class='h4 mb-4'>Log in to LaCuisine</p>
+            <form method='post'>
+              <fieldset class='form-group'>
+                <label for='username' class='sr-only'>Username</label>
+                <div class='input-group'>
+                  <span class='input-group-addon'><i class='fa fa-user' aria-hidden='true'></i></span>
+                  <input class='form-control' type='text' id='username' name='username' placeholder="Username">
+                </div>
+              </fieldset>
+              <fieldset class='form-group'>
+                <label for='password' class='sr-only'>Password</label>
+                <div class='input-group'>
+                  <span class='input-group-addon'><i class='fa fa-lock' aria-hidden='true'></i></span>
+                  <input class='form-control' type='password' id='password' name='password' placeholder="Password">
+                </div>
+              </fieldset>
+              <button type='submit' class='btn btn-dark mr-2'>Log in</button>
+              <div class='form-check form-check-inline'>
+                <label for='remember-me' class='ml-3 form-check-label'>
+                  <input type='checkbox' class='form-check-input' id='remember-me' name='remember-me'>
+                  <small class='align-text-top'>Remember me</small>
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class='col-md-6 col-10'>
+            <p class='h4 mb-4'>Or Sign Up</p>
+            <form method='post' action='/api/users/signup'>
+              <fieldset class='form-group'>
+                <label for='newEmail' class='sr-only'>Enter Email</label>
+                <div class='input-group'>
+                  <span class='input-group-addon'>
+                    <i class='fa fa-envelope-o fa-fw' aria-hidden="true"></i>
+                  </span>
+                  <input type='email' class='form-control' id='newEmail' name='newEmail' placeholder='myemail@mail.com'>
+                </div>
+              </fieldset>
+              <fieldset class='form-group'>
+                <label for='newUsername' class='sr-only'>Choose Username</label>
+                <div class='input-group'>
+                  <span class='input-group-addon'>
+                    <i class='fa fa-user fa-fw'></i>
+                  </span>
+                  <input class='form-control' type='text' id='newUsername' name='newUsername' placeholder='Enter Username'>
+                </div>
+              </fieldset>
+              <div class='form-group row'>
+                <label for='new-password' class='col-12 sr-only col-form-label'>Password</label>
+                <div class='col-auto'>
+                  <div class='input-group'>
+                    <span class='input-group-addon'>
+                      <i class='fa fa-lock' aria-hidden="true"></i>
+                    </span>
+                    <input class='form-control' type='password' name='new-password' id='new-password' aria-describedby="password-specs" placeholder="Enter Password">
+                  </div>
+                </div>
+                <span class='col-auto form-text text-muted' id='password-specs'>Must be at least 4 characters long!</span>
+              </div>
+              <div class='form-group row'>
+                <label for='reenter-password' class='col-12 sr-only col-form-label'>Re-enter Password</label>
+                <div class='col-auto'>
+                  <div class='input-group'>
+                    <span class='input-group-addon'>
+                      <i class='fa fa-lock' aria-hidden="true"></i>
+                    </span>
+                    <input class='form-control' type='password' name='reenter-password' id='reenter-password' placeholder="Re-enter Password">
+                  </div>
+                </div>
+              </div>
+              <button class='btn btn-dark' type='submit'>Sign up</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+    <!-- load from filesystem in event of CDN failure -->
+    <script src='../../../../Reserved Project files\MDB Free\js\jquery-3.2.1.min.js'></script>
+    <script src='../../../../Reserved Project files\bootstrap-4.0.0-beta.2\dist\js\bootstrap.js'></script>
+    <!-- end -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
