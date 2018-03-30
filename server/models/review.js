@@ -2,25 +2,25 @@
 export default (sequelize, DataTypes) => {
   const Review = sequelize.define('review', {
     comment: {
-      'type': DataTypes.TEXT,
-      'allowNull': false,
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
     star: {
-      'type': DataTypes.INTEGER,
-      'validate': {
+      type: DataTypes.INTEGER,
+      validate: {
         isIn: {
-          'args': [[1, 2, 3, 4, 5]],
-          'msg': 'Only stars 1 to 5'
+          args: [[1, 2, 3, 4, 5]],
+          msg: 'Only stars 1 to 5'
         }
       }
     },
     user_id: {
-      'type': DataTypes.INTEGER,
-      'unique': 'user_comment_on_recipe'
+      type: DataTypes.INTEGER,
+      unique: 'user_comment_on_recipe'
     },
     recipe_id: {
-      'type': DataTypes.INTEGER,
-      'unique': 'user_comment_on_recipe'
+      type: DataTypes.INTEGER,
+      unique: 'user_comment_on_recipe'
     }
   }, {
     // defined in config.json
@@ -28,12 +28,12 @@ export default (sequelize, DataTypes) => {
     // underscored: true,
   });
 
-  Review.associate = models => {
+  Review.associate = (models) => {
     // associations here
-    Review.belongsTo(models['user']);
+    Review.belongsTo(models.user);
 
-    Review.belongsTo(models['recipe']);
-  }
+    Review.belongsTo(models.recipe);
+  };
 
   return Review;
-}
+};

@@ -1,4 +1,4 @@
-import {deleteRecipe} from '../../controllers';
+import { deleteRecipe } from '../../controllers';
 
 export default app =>
-  app.delete('/recipes/:recipeId', deleteRecipe)
+  app.delete('/recipes/:recipeId', deleteRecipe);

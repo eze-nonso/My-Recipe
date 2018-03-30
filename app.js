@@ -1,10 +1,12 @@
 import express from 'express';
 import cookieSession from 'cookie-session';
 import fs from 'fs';
-import routes from './server/routes';
 import pg from 'pg';
+import routes from './server/routes';
 
-// pg client by default returns strings for bigInt types, thus by extension sequelize count fn returns strings.. change this default
+
+// pg client by default returns strings for bigInt types,
+// thus by extension sequelize count fn returns strings.. change this default
 pg.defaults.parseInt8 = true;
 
 const urlParser = express.urlencoded({

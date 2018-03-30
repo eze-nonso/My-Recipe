@@ -1,7 +1,7 @@
-import {createUser as create} from '../../controllers';
+import { createUser as create } from '../../controllers';
 
 export default app =>
-  app.post('/users/signup', blockNull, create)
+  app.post('/users/signup', blockNull, create);
 
 
 const blockNull = (req, res, next) => {
@@ -9,5 +9,5 @@ const blockNull = (req, res, next) => {
     next();
     return;
   }
-  res.status(400).send({status: 'Incomplete fields'});
-}
+  res.status(400).send({ status: 'Incomplete fields' });
+};

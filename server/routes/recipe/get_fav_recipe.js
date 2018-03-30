@@ -1,7 +1,7 @@
 import { getFavRecipe } from '../../controllers';
 
 export default app =>
-  app.get('/users/recipes', validUser, getFavRecipe)
+  app.get('/users/recipes', validUser, getFavRecipe);
 
 // implement such functions in ../../middlewares
 function validUser(req, res, next) {

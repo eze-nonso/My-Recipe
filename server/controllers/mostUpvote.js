@@ -1,4 +1,4 @@
-import {review as Review, recipe as Recipe, Sequelize, sequelize} from '../models';
+import { review as Review, recipe as Recipe, Sequelize, sequelize } from '../models';
 
 const Op = Sequelize.Op;
 
@@ -23,10 +23,12 @@ export default (req, res, next) => {
   // })
   // .then(recipes => res.send(recipes))
 
-  if (!req.session.user) return res.status(403).send({
-   status: 'fail',
-   error: 'signin or signup',
-  });
+  if (!req.session.user) {
+    return res.status(403).send({
+      status: 'fail',
+      error: 'signin or signup',
+    });
+  }
   // works generally, apart from double nesting result
   return Review.all({
     where: {
@@ -46,14 +48,13 @@ export default (req, res, next) => {
     ],
     limit: 5
   })
-  .then(reviews => res.send(reviews))
-  .catch(e =>
-    res.writable
-    ? res.status(500).send({
-      [e.name]: e.message
-    })
-    : console.error(e)
-  )
+    .then(reviews => res.send(reviews))
+    .catch(e =>
+      (res.writable
+        ? res.status(500).send({
+          [e.name]: e.message
+        })
+        : console.error(e)));
 
   // if (!req.session.user) return res.status(403).send({
   //   status: 'fail, signin or signup'
@@ -64,4 +65,4 @@ export default (req, res, next) => {
   //   type: sequelize.QueryTypes.SELECT
   // })
   // .then(results => res.send(results))
-}
+};

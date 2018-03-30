@@ -23,12 +23,11 @@ export default {
     }, {
       schema: 'shuffler'
     })
-    .then(() => queryInterface.addConstraint('shuffler.ingredients', [
-      'name'
-    ], {
-      type: 'unique'
-    })
-  ),
+      .then(() => queryInterface.addConstraint('shuffler.ingredients', [
+        'name'
+      ], {
+        type: 'unique'
+      })),
   down: (queryInterface, Sequelize) =>
     queryInterface.dropTable('ingredients', {
       schema: 'shuffler'

@@ -12,9 +12,7 @@ const db = {};
 console.log(`Loaded config using env "${env}"`);
 
 const sequelize = config.use_env_variable
-  ? new Sequelize(
-    process.env[config.use_env_variable], config.options || {}
-  )
+  ? new Sequelize(process.env[config.use_env_variable], config.options || {})
   : new
   Sequelize(
     `${config.dialect}://${config.username}:${config.password}@${config.host}/${config.database}`,
@@ -27,14 +25,13 @@ fs
   .filter(file =>
     (file.indexOf('.') !== 0) &&
     (file !== basename) &&
-    (file.slice(-3) === '.js')
-  )
-  .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
+    (file.slice(-3) === '.js'))
+  .forEach((file) => {
+    const model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(modelName => {
+Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }

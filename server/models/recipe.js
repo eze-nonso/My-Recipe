@@ -2,25 +2,25 @@
 export default (sequelize, DataTypes) => {
   const Recipe = sequelize.define('recipe', {
     name: {
-      'type': DataTypes.STRING,
-      'allowNull': false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     direction: {
-      'type': DataTypes.TEXT,
-      'allowNull': false
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     per_serving: {
-      'type': DataTypes.DECIMAL(3,1)
+      type: DataTypes.DECIMAL(3, 1)
     },
     user_id: {
-      'type': DataTypes.INTEGER,
-      'references': {
+      type: DataTypes.INTEGER,
+      references: {
         model: 'users',
         key: 'id',
       },
       // this is also the default
-      'onDelete': 'SET NULL',
-      'onUpdate': 'CASCADE'
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE'
     }
   }, {
     // schema: 'shuffler',
@@ -36,16 +36,16 @@ export default (sequelize, DataTypes) => {
 
   });
 
-  Recipe.associate = models => {
+  Recipe.associate = (models) => {
     // associations here
-    Recipe.belongsTo(models['user']);
+    Recipe.belongsTo(models.user);
 
-    Recipe.hasMany(models['review']);
+    Recipe.hasMany(models.review);
 
-    Recipe.belongsToMany(models['ingredient'], {
-      through: models['quantity'],
+    Recipe.belongsToMany(models.ingredient, {
+      through: models.quantity,
     });
-  }
+  };
 
-  return Recipe
-}
+  return Recipe;
+};

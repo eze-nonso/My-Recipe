@@ -1,4 +1,4 @@
-import {newRecipe} from '../../controllers';
+import { newRecipe } from '../../controllers';
 
 export default app =>
-  app.post('/recipes', newRecipe)
+  app.post('/recipes', newRecipe);

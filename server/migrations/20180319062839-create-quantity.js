@@ -1,7 +1,7 @@
 export default {
 
   up: (queryInterface, Sequelize) =>
-     queryInterface.createTable('quantities', {
+    queryInterface.createTable('quantities', {
       qty: {
         type: Sequelize.STRING,
         allowNull: false
@@ -38,40 +38,38 @@ export default {
     }, {
       schema: 'shuffler',
     })
-    .then(() =>
-      queryInterface.addConstraint({
-        tableName: 'quantities',
-        schema: 'shuffler',
-      }, [
-        'ingredient_id',
-        'recipe_id'
-      ], {
-        type: 'unique'
-      })
-    )
-    .then(() =>
-      queryInterface.addConstraint({
-        tableName: 'quantities',
-        schema: 'shuffler'
-      }, [
-        'ingredient_id'
-      ], {
-        type: 'foreign key',
-        name: 'quantities_ingredient_id_fkey',
-        references: {
-          table: {
-            tableName: 'ingredients',
-            schema: 'shuffler'
+      .then(() =>
+        queryInterface.addConstraint({
+          tableName: 'quantities',
+          schema: 'shuffler',
+        }, [
+          'ingredient_id',
+          'recipe_id'
+        ], {
+          type: 'unique'
+        }))
+      .then(() =>
+        queryInterface.addConstraint({
+          tableName: 'quantities',
+          schema: 'shuffler'
+        }, [
+          'ingredient_id'
+        ], {
+          type: 'foreign key',
+          name: 'quantities_ingredient_id_fkey',
+          references: {
+            table: {
+              tableName: 'ingredients',
+              schema: 'shuffler'
+            },
+            field: 'id'
           },
-          field: 'id'
-        },
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
-      })
-    ),
+          onDelete: 'cascade',
+          onUpdate: 'cascade'
+        })),
   down: (queryInterface, Sequelize) =>
-     queryInterface.dropTable({
-       tableName: 'quantities',
-       schema: 'shuffler'
-     })
+    queryInterface.dropTable({
+      tableName: 'quantities',
+      schema: 'shuffler'
+    })
 };

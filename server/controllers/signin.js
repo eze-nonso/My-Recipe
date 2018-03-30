@@ -1,4 +1,4 @@
-import {user as User, Sequelize} from '../models';
+import { user as User, Sequelize } from '../models';
 
 const Op = Sequelize.Op;
 // assuming input is validated
@@ -21,17 +21,17 @@ export default (req, res) => {
       exclude: ['password']
     }
   })
-  .then(user => {
-    if (user) {
+    .then((user) => {
+      if (user) {
       // set session cookie on signin
-      req.session.user = user.getDataValue('id');
-      res.send({
-        status: `Logged in as user ${user.get('username')}`,
-        account: user.get({plain: true})
-      });
-      // console.log(res.writable);
-      return;
-    }
-    res.status(403).send({status: 'Failed login, try again'});
-  })
+        req.session.user = user.getDataValue('id');
+        res.send({
+          status: `Logged in as user ${user.get('username')}`,
+          account: user.get({ plain: true })
+        });
+        // console.log(res.writable);
+        return;
+      }
+      res.status(403).send({ status: 'Failed login, try again' });
+    });
 };

@@ -7,7 +7,7 @@ export default (req, res, next) =>
     include: [{
       model: Review,
       where: {
-        'star': {
+        star: {
           [Op.gt]: 2
         },
         user_id: parseInt(req.session.user) // analogous to including User
@@ -15,13 +15,11 @@ export default (req, res, next) =>
       attributes: [],
     }]
   })
-  .then(recipes =>
-    res.send(recipes)
-  )
-  .catch(e =>
-    res.writable
-    ? res.status(500).send({
-      [e.name]: e.message
-    })
-    : console.error(e)
-  )
+    .then(recipes =>
+      res.send(recipes))
+    .catch(e =>
+      (res.writable
+        ? res.status(500).send({
+          [e.name]: e.message
+        })
+        : console.error(e)));
