@@ -14,6 +14,7 @@ before_script:
 cache:
   directories:
     - "node_modules"
+CC_TEST_REPORTER_ID: 91944722156eabe502e8bf7fdc11aa5e1c90a7dcc2cc758f17050ec502f1ceb1
 script: npm test -- --exit
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
