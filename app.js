@@ -13,9 +13,9 @@ const urlParser = express.urlencoded({
   extended: true, limit: '50kb', parameterLimit: 10
 });
 
-const key = fs.readFileSync('/Users/user/Desktop/node tutorial/beginner-node/connect/key.pem') || process.env.key1;
+const key = process.env.key1;
 
-const cert = fs.readFileSync('/Users/user/Desktop/node tutorial/beginner-node/connect/cert.pem') || process.env.key2;
+const cert = process.env.key2;
 
 const app = express();
 
