@@ -1,1 +1,10 @@
 language: node_js
+node_js:
+  - "node"
+env:
+  - NODE_ENV=test
+services:
+  - postgresql
+before_script:
+  - psql -c "CREATE DATABASE testing1;" -U shuffler
+  - psql -c "CREATE SCHEMA shuffler;"
