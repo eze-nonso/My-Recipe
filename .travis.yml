@@ -13,4 +13,4 @@ before_script:
 cache:
   directories:
     - "node_modules"
-script: npm test
+script: npm test -- --exit
