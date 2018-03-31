@@ -6,5 +6,7 @@ env:
 services:
   - postgresql
 before_script:
-  - psql -c "CREATE DATABASE testing1;" -U shuffler
-  - psql -c "CREATE SCHEMA shuffler;"
+  - psql -c "CREATE DATABASE testing1;" -U postgres
+  - psql -c "CREATE USER shuffler WITH PASSWORD 'password1';" -U postgres
+  - psql -U postgres -c "grant all on database testing1 to shuffler;"
+  - psql -d testing1 -U shuffler -c "create schema shuffler;"
