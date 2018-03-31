@@ -88,7 +88,7 @@ suite('User signup and login', () => {
         expect(res).to.have.status(403);
         expect(res).to.be.json;
         res.body.should.have.property('status');
-        res.body.should.have.property('account');
+        res.body.should.not.have.property('account');
       }));
   });
 });
