@@ -2,4 +2,3 @@
 --require babel-register
 --require dotenv/config
 --recursive
--w
