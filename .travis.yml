@@ -3,8 +3,8 @@ node_js:
   - "node"
 
 env:
-  - global: CC_TEST_REPORTER_ID=91944722156eabe502e8bf7fdc11aa5e1c90a7dcc2cc758f17050ec502f1ceb1
-  - NODE_ENV=test
+  global: NODE_ENV=test
+  matrix: CC_TEST_REPORTER_ID=91944722156eabe502e8bf7fdc11aa5e1c90a7dcc2cc758f17050ec502f1ceb1 
 
 services:
   - postgresql
