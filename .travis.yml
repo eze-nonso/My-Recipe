@@ -22,9 +22,7 @@ before_script:
 addons:
   code_climate:
     repo_token: 91944722156eabe502e8bf7fdc11aa5e1c90a7dcc2cc758f17050ec502f1ceb1
-cache:
-  directories:
-    - "node_modules"
+
 
 branches:
   only:
