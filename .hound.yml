@@ -1,0 +1,10 @@
+scss:
+  enabled: false
+
+jshint:
+  enabled: false
+
+eslint:
+  enabled: true
+  config: .eslintrc
+  ignore_file: .eslintignore
