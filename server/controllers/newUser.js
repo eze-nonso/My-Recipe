@@ -1,9 +1,8 @@
 import { user as User, Sequelize } from '../models';
 
-const Op = Sequelize.Op;
-
+const { Op } = Sequelize;
 // !!findCreateFind will not work under a transaction in postgres
-export default (req, res, next) => {
+export default (req, res) => {
   User.findCreateFind({
     where: {
       [Op.or]: [

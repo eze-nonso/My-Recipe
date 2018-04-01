@@ -1,8 +1,6 @@
 import { user as User, Sequelize } from '../models';
 
-const Op = Sequelize.Op;
-// assuming input is validated
-
+const { Op } = Sequelize;
 
 // also set session cookie on signin
 export default (req, res) => {

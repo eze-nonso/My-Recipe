@@ -1,6 +1,12 @@
 import { ingredient as Ingredient } from '../../models';
 
-// export for create and update
+/**
+ * @description export for create and update
+ * @param {object} recipe DAO instance
+ * @param {array} ingredientArray
+ * @param {object} t transaction instance
+ * @return {promise} promise chain of unique array elements
+ */
 export default function createOrUpdate(recipe, ingredientArray, t) {
   if (!Array.isArray(ingredientArray)) throw new Error('Expected an array for recipe ingredients');
 

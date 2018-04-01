@@ -2,3 +2,4 @@
 --require babel-register
 --require dotenv/config
 --recursive
+--require coveralls

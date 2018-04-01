@@ -57,14 +57,19 @@ export default {
       schema: 'shuffler',
     })
       .then(() =>
-      // works without full schema qualification with help of search_path
-        queryInterface.addConstraint('shuffler.reviews', [
+        queryInterface.addConstraint({
+          tableName: 'reviews',
+          schema: 'shuffler'
+        }, [
           'user_id', 'recipe_id'
         ], {
           type: 'unique',
         }))
       .then(() =>
-        queryInterface.addConstraint('shuffler.reviews', [
+        queryInterface.addConstraint({
+          tableName: 'reviews',
+          schema: 'shuffler'
+        }, [
           'star'
         ], {
           type: 'check',
@@ -75,9 +80,10 @@ export default {
           }
         })),
 
-  down: (queryInterface, Sequelize) =>
+  down: queryInterface => (
     queryInterface.dropTable({
       tableName: 'reviews',
       schema: 'shuffler'
     })
+  )
 };

@@ -1,8 +1,11 @@
 import { recipe as Recipe, review as Review, Sequelize } from '../models';
 
-const Op = Sequelize.Op;
-export default (req, res, next) =>
-  //  this returns recipes that the particular user has reviewed with more than 2 stars. specs may change in the future
+const { Op } = Sequelize;
+export default (req, res) =>
+  //  this returns recipes that the particular user has reviewed with
+
+  // more than 2 stars. specs may change in the future
+
   Recipe.all({
     include: [{
       model: Review,
@@ -10,7 +13,7 @@ export default (req, res, next) =>
         star: {
           [Op.gt]: 2
         },
-        user_id: parseInt(req.session.user) // analogous to including User
+        user_id: parseInt(req.session.user, 10) // analogous to including User
       },
       attributes: [],
     }]
