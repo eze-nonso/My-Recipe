@@ -1,7 +1,7 @@
 import app from '../app';
 import { umzug } from '../server/models/index';
 
-app.set('port', parseInt(process.env.PORT) || 8000);
+app.set('port', parseInt(process.env.PORT, 10) || 8000);
 
 Promise.resolve()
 // execute pending migrations

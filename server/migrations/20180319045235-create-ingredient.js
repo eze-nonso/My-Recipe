@@ -28,8 +28,9 @@ export default {
       ], {
         type: 'unique'
       })),
-  down: (queryInterface, Sequelize) =>
+  down: queryInterface => (
     queryInterface.dropTable('ingredients', {
       schema: 'shuffler'
     })
+  )
 };

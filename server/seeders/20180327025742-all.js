@@ -1,7 +1,7 @@
 import { users, reviews, quantities, ingredients, recipes } from './faker/fakify';
 
 export default {
-  up: (queryInterface, Sequelize) =>
+  up: queryInterface =>
     queryInterface.bulkInsert({
       tableName: 'users',
       schema: 'shuffler'
@@ -27,7 +27,7 @@ export default {
           schema: 'shuffler',
         }, reviews)),
 
-  down: (queryInterface, Sequelize) =>
+  down: queryInterface =>
     queryInterface.bulkDelete({
       tableName: 'reviews',
       schema: 'shuffler',

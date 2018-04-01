@@ -5,3 +5,15 @@ node_modules/
 # Exclude .env
 
 .env
+
+# Exclude coverage
+
+coverage/
+
+# Exclude .nyc folder
+
+.nyc*/
+
+# Exclude .coveralls.yml, since it can only be needed locally
+
+.coveralls.yml
