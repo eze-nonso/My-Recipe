@@ -6,5 +6,5 @@ jshint:
 
 eslint:
   enabled: true
-  config: .eslintrc
+  config_file: .eslintrc
   ignore_file: .eslintignore
