@@ -3,8 +3,6 @@ const babelPresetEnv = require('babel-preset-env');
 
 const babelModuleExports = require('babel-plugin-add-module-exports');
 
-const istanbul = require('babel-plugin-istanbul');
-
 module.exports = {
   presets: [
     babelPresetEnv,
@@ -12,11 +10,4 @@ module.exports = {
   plugins: [
     babelModuleExports,
   ],
-  env: {
-    test: {
-      plugins: [
-        istanbul,
-      ]
-    }
-  }
 };
