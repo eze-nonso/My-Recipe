@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=text --reporter=icov mocha",
+    "test": "nyc --reporter=text --reporter=Icov mocha",
     "start:serve": "nodemon -r dotenv/config bin/bootstrap",
     "start:serve2": "nodemon -r dotenv/config ./node_modules/babel-cli/bin/babel-node ./bin/www",
     "lint": "eslint",
