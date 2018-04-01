@@ -5,3 +5,11 @@ node_modules/
 # Exclude .env
 
 .env
+
+# Exclude coverage
+
+coverage/
+
+# Exclude .nyc folder
+
+.nyc*/
