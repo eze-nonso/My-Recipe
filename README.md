@@ -1,8 +1,16 @@
-[![Test Coverage](https://api.codeclimate.com/v1/badges/572d6152a343e7487544/test_coverage)](https://codeclimate.com/github/eze-nonso/Project-Blue/test_coverage)
+<p style='text-align:center;'>
+  <a href="https://travis-ci.org/eze-nonso/Project-Blue">
+    <img src="https://travis-ci.org/eze-nonso/Project-Blue.svg?branch=develop"/>
+  </a>
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/572d6152a343e7487544/maintainability)](https://codeclimate.com/github/eze-nonso/Project-Blue/maintainability)
+  <a href="https://codeclimate.com/github/eze-nonso/Project-Blue/test_coverage">
+    <img src="https://api.codeclimate.com/v1/badges/572d6152a343e7487544/test_coverage"/>
+  </a>
 
-[![Build Status](https://travis-ci.org/eze-nonso/Project-Blue.svg?branch=develop)](https://travis-ci.org/eze-nonso/Project-Blue)
+  <a href="https://codeclimate.com/github/eze-nonso/Project-Blue/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/572d6152a343e7487544/maintainability"/>
+  </a>
+</p>
 
 # Project-Blue
 Neque dicta enim quasi. Qui corrupti est quisquam. Facere animi quod aut. Qui nulla consequuntur consectetur sapiente.
