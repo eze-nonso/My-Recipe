@@ -4,7 +4,7 @@ node_js:
 
 env:
   global: NODE_ENV=test
-  matrix: CC_TEST_REPORTER_ID=91944722156eabe502e8bf7fdc11aa5e1c90a7dcc2cc758f17050ec502f1ceb1 
+  matrix: CC_TEST_REPORTER_ID=91944722156eabe502e8bf7fdc11aa5e1c90a7dcc2cc758f17050ec502f1ceb1
 
 services:
   - postgresql
@@ -17,11 +17,6 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-
-addons:
-  code_climate:
-    repo_token: 91944722156eabe502e8bf7fdc11aa5e1c90a7dcc2cc758f17050ec502f1ceb1
-
 
 branches:
   only:
