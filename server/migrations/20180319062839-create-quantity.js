@@ -67,9 +67,10 @@ export default {
           onDelete: 'cascade',
           onUpdate: 'cascade'
         })),
-  down: (queryInterface, Sequelize) =>
+  down: queryInterface => (
     queryInterface.dropTable({
       tableName: 'quantities',
       schema: 'shuffler'
     })
+  )
 };

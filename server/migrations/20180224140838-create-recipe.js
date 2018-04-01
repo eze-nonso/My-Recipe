@@ -78,7 +78,7 @@ export default {
           onUpdate: 'CASCADE',
         })),
 
-  down: (queryInterface, Sequelize) =>
+  down: queryInterface =>
     queryInterface.dropTable({
       tableName: 'recipes',
       schema: 'shuffler'

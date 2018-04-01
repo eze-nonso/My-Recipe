@@ -32,7 +32,7 @@ export default {
     }, {
       schema: 'shuffler',
     }),
-  down: (queryInterface, Sequelize) =>
+  down: queryInterface =>
     queryInterface.dropTable({
       tableName: 'users',
       schema: 'shuffler'

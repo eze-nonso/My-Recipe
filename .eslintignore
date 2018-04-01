@@ -4,3 +4,10 @@
 
 # exclude node_modules
 node_modules
+
+# exclude readme.md & license
+README.md
+LICENSE
+
+# exclude templates: !confirm this
+templates

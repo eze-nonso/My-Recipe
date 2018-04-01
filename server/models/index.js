@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
-import settings from '../babel_hook';
 import Umzug from 'umzug';
+import settings from '../babel_hook';
+
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
@@ -42,7 +43,6 @@ db.Sequelize = Sequelize;
 
 // handling migration
 const umzug = new Umzug({
-  logging: console.log,
   migrations: {
     params: [
       sequelize.getQueryInterface(),

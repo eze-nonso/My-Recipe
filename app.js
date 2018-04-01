@@ -1,6 +1,5 @@
 import express from 'express';
 import cookieSession from 'cookie-session';
-import fs from 'fs';
 import pg from 'pg';
 import routes from './server/routes';
 

@@ -44,7 +44,7 @@ const umzugSeed = new Umzug({
 });
 
 /**
- * function to create user and recipe
+ * @description function to create user and recipe
  *
  * @param {obj} agent
  * @return {promise} seeder promise

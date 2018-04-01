@@ -1,11 +1,11 @@
-import { recipe as Recipe, user as User, ingredient as Ingredient, Sequelize, sequelize, } from '../models';
+import { user as User, ingredient as Ingredient, sequelize, } from '../models';
 
 import createOrUpdate from './common';
 
-export default (req, res, next) => {
+export default (req, res) => {
   if (req.session.user && (req.body.name && req.body.direction)) {
-    const recipeId = req.params.recipeId;
-    const userId = req.session.user;
+    const { params: { recipeId } } = req;
+    const { session: { user: userId } } = req;
 
     return User.findById(userId)
       .then((user) => {

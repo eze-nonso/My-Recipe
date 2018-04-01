@@ -1,9 +1,8 @@
-import { recipe as Recipe, user as User, quantity as Quantity, ingredient as Ingredient, Sequelize, sequelize } from '../models';
+import { recipe as Recipe, user as User, ingredient as Ingredient, sequelize } from '../models';
 
 import createOrUpdate from './common';
 
-let newRecipe;
-export default (req, res, next) => {
+export default (req, res) => {
   if (req.session.user) {
     // query by cookie value
     const userId = req.session.user;
@@ -23,7 +22,7 @@ export default (req, res, next) => {
         Recipe.create({
           name: req.body.name,
           direction: req.body.direction,
-          per_serving: parseInt(req.body.per_serving)
+          per_serving: parseInt(req.body.per_serving, 10)
         }, {
           fields: [
             'name', 'direction', 'per_serving'
@@ -39,7 +38,7 @@ export default (req, res, next) => {
           transaction: t,
         })
           .then(() =>
-            createOrUpdate(recipe, req.body.ingredients, t, ))
+            createOrUpdate(recipe, req.body.ingredients, t))
           .then(() => recipe)))
       .then(recipe => recipe.reload({
         include: [{
