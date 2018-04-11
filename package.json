@@ -1,7 +1,6 @@
 {
-  "name": "sequel",
+  "name": "Projekt-blyu",
   "version": "1.0.0",
-  "main": "nodemon -r dotenv/config bin/bootstrap",
   "scripts": {
     "test": "nyc mocha",
     "test:exit": "npm test -- --exit",
