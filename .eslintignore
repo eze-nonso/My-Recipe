@@ -1,13 +1,20 @@
-# exclude package.json and package-lock.json
+# exclude package.json and package-lock.json and config files
 
 **/*.json
 
 # exclude node_modules
+
 node_modules
 
 # exclude readme.md & license
+
 README.md
 LICENSE
 
 # exclude templates: !confirm this
+
 templates/
+
+# exclude coverage directory
+
+coverage/

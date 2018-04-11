@@ -1,7 +1,7 @@
 {
   "name": "sequel",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "nodemon -r dotenv/config bin/bootstrap",
   "scripts": {
     "test": "nyc mocha",
     "test:exit": "npm test -- --exit",
@@ -13,6 +13,9 @@
   },
   "author": "eze",
   "license": "ISC",
+  "engines": {
+    "node": "8.4.0"
+  },
   "devDependencies": {
     "babel-plugin-istanbul": "^4.1.5",
     "chai": "^4.1.2",

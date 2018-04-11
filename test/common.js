@@ -26,7 +26,6 @@ const umzugMigrate = new Umzug({
   storageOptions: {
     // setup sequelize instance provides storage options including schema
     sequelize,
-    tableName: 'sequelize_meta',
   }
 });
 
