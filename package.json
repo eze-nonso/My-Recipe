@@ -5,8 +5,8 @@
     "test": "nyc mocha",
     "test:exit": "npm test -- --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "start:serve": "nodemon -r dotenv/config bin/bootstrap",
-    "start:serve2": "nodemon -r dotenv/config ./node_modules/babel-cli/bin/babel-node ./bin/www",
+    "start:serve": "nodemon -x \"node -r dotenv/config bin/bootstrap\"",
+    "start:serve2": "nodemon -x \"node -r dotenv/config ./node_modules/babel-cli/bin/babel-node ./bin/www\"",
     "lint": "eslint",
     "seq": "node -r dotenv/config ./node_modules/sequelize-cli"
   },
