@@ -23,7 +23,12 @@ const router = express.Router();
 
 app
   .use(urlParser)
-  .use('/api', router);
+  .use('/api', router)
+  .all('/', (req, res) => {
+    return res.status(200).send({
+      message: 'Welcome to our top secret Projekt-blue server'
+    });
+  });
 
 // including cookieSession
 router
