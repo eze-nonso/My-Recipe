@@ -33,6 +33,7 @@
     "use_env_variable": "DATABASE_URL",
     "options": {
       "operatorsAliases": false,
+      "native": true,
       "logging": false,
       "define": {
         "schema": "shuffler",
