@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node bin/bootstrap",
-    "heroku-postbuild": "pg:psql -c \"create if not exists schema shuffler;\" -U kjbbicbqmwmdov",
     "test": "nyc mocha",
     "test:exit": "npm test -- --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
