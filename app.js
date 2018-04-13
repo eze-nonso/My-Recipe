@@ -23,10 +23,15 @@ const router = express.Router();
 
 app
   .use(urlParser)
+  .all('/api', (req, res) => {
+    return res.send({
+      message: 'This is the Projekt-blue api'
+    })
+  })
   .use('/api', router)
   .all('/', (req, res) => {
-    return res.status(200).send({
-      message: 'Welcome to our top secret Projekt-blue server'
+    return res.send({
+      message: 'Welcome to the top secret Projekt-blue server'
     });
   });
 
