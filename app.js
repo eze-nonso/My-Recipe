@@ -26,14 +26,14 @@ app
   .all('/api', (req, res) => ({
     return res.send({
       message: 'This is the Projekt-blue api'
-    })
+    });
   }))
   .use('/api', router)
-  .all('/', (req, res) => {
+  .all('/', (req, res) => ({
     return res.send({
       message: 'Welcome to the top secret Projekt-blue server'
     });
-  });
+  }));
 
 // including cookieSession
 router
