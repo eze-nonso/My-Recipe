@@ -5,9 +5,8 @@ const validUser = (req, res, next) => {
     return next();
   }
 
-  res.status(403).send({
-    status: 'fail',
-    error: 'Login or signup',
+  return res.status(403).send({
+    status: 'fail, login or signup',
   });
 };
 

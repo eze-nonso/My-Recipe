@@ -18,7 +18,7 @@ export default (req, res) =>
           ? res.status(201).send({
             status: 'review added'
           })
-          : res.status(201).send({
+          : res.status.send({
             status: 'review updated'
           })))
         .catch(e =>
