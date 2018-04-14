@@ -1,6 +1,6 @@
 {
   "development": {
-    "use_env_variable": "devUrl",
+    "use_env_variable": "DEVURL",
     "options": {
       "operatorsAliases": false,
       "logging": false,
@@ -15,7 +15,7 @@
     }
   },
   "test": {
-    "use_env_variable": "url",
+    "use_env_variable": "URL",
     "options": {
       "operatorsAliases": false,
       "logging": false,
@@ -30,9 +30,10 @@
     }
   },
   "production": {
-    "use_env_variable": "produrl",
+    "use_env_variable": "DATABASE_URL",
     "options": {
       "operatorsAliases": false,
+      "native": true,
       "logging": false,
       "define": {
         "schema": "shuffler",

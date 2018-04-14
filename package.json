@@ -2,18 +2,20 @@
   "name": "Projekt-blyu",
   "version": "1.0.0",
   "scripts": {
+    "start": "node bin/bootstrap",
     "test": "nyc mocha",
     "test:exit": "npm test -- --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "start:serve": "nodemon -r dotenv/config bin/bootstrap",
-    "start:serve2": "nodemon -r dotenv/config ./node_modules/babel-cli/bin/babel-node ./bin/www",
+    "start:serve": "nodemon -x \"node -r dotenv/config bin/bootstrap\"",
+    "start:serve2": "nodemon -x \"node -r dotenv/config ./node_modules/babel-cli/bin/babel-node ./bin/www\"",
     "lint": "eslint",
     "seq": "node -r dotenv/config ./node_modules/sequelize-cli"
   },
   "author": "eze",
   "license": "ISC",
   "engines": {
-    "node": "8.4.0"
+    "node": "8.4.0",
+    "npm": "5.8.0"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "^4.1.5",
@@ -45,7 +47,8 @@
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.33.1",
     "sequelize-cli": "^4.0.0",
-    "umzug": "^2.1.0"
+    "umzug": "^2.1.0",
+    "pg-native": "^2.2.0"
   },
   "description": "A recipes app",
   "keywords": [

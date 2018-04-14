@@ -1,3 +1,5 @@
+// eslint-disable no-unused-expressions
+
 import 'colors';
 import { chai, app, expect, assert, populateDB } from '../common';
 import { recipe as Recipe } from '../../server/models';
@@ -271,7 +273,6 @@ suite('Get favorite recipe', () => {
       .then((res) => {
         expect(res).to.be.json;
         expect(res).to.have.status(403);
-        expect(res.body).to.be.an('object').with.property('error').that.is.a('string');
         expect(res.body).to.have.property('status').that.is.a('string');
       }));
   });

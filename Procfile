@@ -1,1 +1,1 @@
-web: node bin/bootstrap
+web: npm start
