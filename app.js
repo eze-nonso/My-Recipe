@@ -23,17 +23,17 @@ const router = express.Router();
 
 app
   .use(urlParser)
-  .all('/api', (req, res) => {
-    return res.send({
+  .all('/api', (req, res) => (
+    res.send({
       message: 'This is the Projekt-blue api'
     })
-  })
+  ))
   .use('/api', router)
-  .all('/', (req, res) => {
-    return res.send({
+  .all('/', (req, res) => (
+    res.send({
       message: 'Welcome to the top secret Projekt-blue server'
-    });
-  });
+    })
+  ));
 
 // including cookieSession
 router
@@ -49,10 +49,10 @@ Object.keys(routes).forEach((ident) => {
   routes[ident](router);
 });
 
-router.all('/*', (req, res) => {
+router.all('/*', (req, res) => (
   res.status(501).send({
     status: 'Oops! try not to fall on the wayside, says catchall'
-  });
-});
+  })
+));
 
 export default app;

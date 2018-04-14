@@ -1,3 +1,5 @@
+// eslint-disable no-console
+
 import app from '../app';
 import { umzug } from '../server/models/index';
 
@@ -14,3 +16,4 @@ Promise.resolve()
   .then(() => app.listen(app.get('port')))
   .then(() => console.log(`Up and running on PORT ${app.get('port')}`))
   .catch(e => console.error(e));
+
