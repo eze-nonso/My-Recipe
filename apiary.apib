@@ -1,0 +1,635 @@
+FORMAT: 1A
+HOST: https://projekt-blyu.herokuapp.com/api
+
+# Project-Blue
+
+A top-secret, top-level-access-only government agency that engages
+in protecting
+citizens from leftist propaganda ideas.
+
+# Group User
+
+## Signup [/users/signup]
+
+### Create a new user account [POST]
+You may create a new user account using this action. It takes a JSON payload
+containing unique username and email, and a password.
+
+- Request (application/x-www-form-urlencoded)
+
+        {
+            "username": "mandy",
+            "email": "mandymanny@gmail.com",
+            "password": "a41556"
+        }
+    
+- Response 201 (application/json)
+    
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "account created",
+                "id": 1
+            }
+            
+    
+- Response 400 (application/json)
+    
+    - Headers 
+            
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "username in use"
+            }
+
+
+            
+- Request (application/x-www-form-urlencoded)
+        
+        {
+            "username": "mandyotter",
+            "email": "manny@gmail.com"
+        }
+        
+        
+- Response 400 (application/json)
+        
+    - Headers
+            
+            X-Powered-By: Express
+    
+    - Body
+        
+            {
+                "status": "incomplete fields"
+            }
+
+        
+        
+## Signin [/users/signin]
+
+### Sign into existing user account [POST]
+You may sign into an existing user account using this action, specifying either
+of email or username and password.
+
+
+- Request (application/x-www-form-urlencoded)
+
+        {
+            "username": "mandy",
+            "password": "a41556"
+        }
+
+- Response 200 (application/json)
+        
+    - Headers
+            
+            X-Powered-By: Express
+            
+    - Body 
+    
+            {
+                "status": "Logged in as user mandy",
+                "account": {
+                "id": 1,
+                "username": "mandy",
+                "email": "mandymanny@gmail.com",
+                "created_at": "2018-04-13T14:00:25.097Z",
+                "updated_at": "2018-04-13T14:00:25.097Z"
+                }
+            }
+            
+            Not logged in user
+            
+- Request (application/x-www-form-urlencoded)
+
+        {
+            "email": "paddy_pea@gmail.com",
+            "password": "a415567"
+        }
+        
+- Response 403 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "Failed login, try again"
+            }
+            
+        
+        
+# Group Recipes
+
+## New [/recipes]
+
+### Add new Recipe [POST]
+Logged in user may add a new recipe, fails for not-logged in user.
+
+- Request (application/x-www-form-urlencoded)
+
+        {
+            direction: 
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna 
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit 
+                esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, 
+                sunt in culpa qui officia deserunt mollit anim id est 
+                laborum.',
+          per_serving: '1.5',
+          name: 'To die for pot roast',
+          ingredients:
+           [ 
+             { salt: '2 pinches' },
+             { chilli: '5 grammes' },
+             { Water: '2 cups' } 
+            ] 
+        }
+
+- Response 201 (application/json)
+
+    - Headers
+        
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "added",
+                "recipe": {
+                    "id": 1,
+                    "name": "To die for pot roast",
+                    "direction": "Lorem ipsum dolor sit amet, consectetur 
+                        adipiscing elit, sed do eiusmod tempor incididunt 
+                        ut labore et dolore magna aliqua. Ut enim ad minim 
+                        veniam, quis nostrud exercitation ullamco laboris 
+                        nisi ut aliquip ex ea commodo consequat. Duis aute 
+                        irure dolor in reprehenderit in voluptate velit 
+                        esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, 
+                        sunt in culpa qui officia deserunt mollit anim id 
+                        est laborum.",
+                    "per_serving": "1.0",
+                    "user_id": 2,
+                    "created_at": "2018-04-13T22:17:29.268Z",
+                    "updated_at": "2018-04-13T22:17:29.291Z",
+                    "ingredients": [
+                        {
+                            "id": 1,
+                            "name": "Water",
+                            "created_at": "2018-04-13T22:17:29.313Z",
+                            "updated_at": "2018-04-13T22:17:29.313Z",
+                            "quantity": {
+                                "qty": "2 cups",
+                                "created_at": "2018-04-13T22:17:29.350Z",
+                                "updated_at": "2018-04-13T22:17:29.350Z",
+                                "ingredient_id": 1,
+                                "recipe_id": 1
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "name": "chilli",
+                            "created_at": "2018-04-13T22:17:29.361Z",
+                            "updated_at": "2018-04-13T22:17:29.361Z",
+                            "quantity": {
+                                "qty": "5 grammes",
+                                "created_at": "2018-04-13T22:17:29.368Z",
+                                "updated_at": "2018-04-13T22:17:29.368Z",
+                                "ingredient_id": 2,
+                                "recipe_id": 1
+                            }
+                        },
+                        {
+                            "id": 3,
+                            "name": "salt",
+                            "created_at": "2018-04-13T22:17:29.376Z",
+                            "updated_at": "2018-04-13T22:17:29.376Z",
+                            "quantity": {
+                                "qty": "2 pinches",
+                                "created_at": "2018-04-13T22:17:29.383Z",
+                                "updated_at": "2018-04-13T22:17:29.383Z",
+                                "ingredient_id": 3,
+                                "recipe_id": 1
+                            }
+                        }
+                    ]
+                }
+            }
+            
+- Response 403 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "fail, signin or signup"
+            }
+
+### Get all recipes [GET]
+Logged in user may get all the recipes in app, will fail for not logged in 
+user.
+
+- Response 200 (application/json)
+
+    - Headers
+            
+            X-Powered-By: Express
+            
+    - Body 
+    
+            [
+                {
+                    "id": 1,
+                    "name": "To die for pot roast",
+                    "direction": "Lorem ipsum dolor sit amet, 
+                        consectetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad 
+                        minim veniam, quis nostrud exercitation ullamco laboris 
+                        nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+                        dolor in reprehenderit in voluptate velit esse cillum 
+                        dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+                        cupidatat non proident, sunt in culpa qui officia 
+                        deserunt mollit anim id est laborum.",
+                    "per_serving": "1.0",
+                    "created_at": "2018-04-13T22:17:29.268Z",
+                    "updated_at": "2018-04-13T22:17:29.291Z",
+                    "ingredients": [
+                        {
+                            "id": 3,
+                            "name": "salt",
+                            "created_at": "2018-04-13T22:17:29.376Z",
+                            "updated_at": "2018-04-13T22:17:29.376Z",
+                            "quantity": {
+                                "qty": "2 pinches",
+                                "created_at": "2018-04-13T22:17:29.383Z",
+                                "updated_at": "2018-04-13T22:17:29.383Z",
+                                "ingredient_id": 3,
+                                "recipe_id": 1
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "name": "chilli",
+                            "created_at": "2018-04-13T22:17:29.361Z",
+                            "updated_at": "2018-04-13T22:17:29.361Z",
+                            "quantity": {
+                                "qty": "5 grammes",
+                                "created_at": "2018-04-13T22:17:29.368Z",
+                                "updated_at": "2018-04-13T22:17:29.368Z",
+                                "ingredient_id": 2,
+                                "recipe_id": 1
+                            }
+                        },
+                        {
+                            "id": 1,
+                            "name": "Water",
+                            "created_at": "2018-04-13T22:17:29.313Z",
+                            "updated_at": "2018-04-13T22:17:29.313Z",
+                            "quantity": {
+                                "qty": "2 cups",
+                                "created_at": "2018-04-13T22:17:29.350Z",
+                                "updated_at": "2018-04-13T22:17:29.350Z",
+                                "ingredient_id": 1,
+                                "recipe_id": 1
+                            }
+                        }
+                    ],
+                    "reviews": []
+                }
+            ]
+        
+- Response 403 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "fail, signin or signup"
+            }
+            
+## Existing [/recipes/{recipeId}]
+
+- Parameter
+    
+    - recipeId (number) - integer ID of recipe to modify or delete
+    
+### Modify existing recipe [PUT]
+Logged in user may modify recipe he initially added, will fail for not logged
+in user.
+
+- Parameter
+
+    - recipeId: 1
+
+- Request (application/x-www-form-urlencoded)
+
+        {
+            "name": "Carribean pearls and diamond sea shells",
+            "direction": "Boil and serve spiced with spinach",
+            "per_serving": 1
+        }
+        
+- Response 200 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "updated",
+                "recipe": {
+                    "id": 1,
+                    "name": "Carribean pearls and diamond sea shells",
+                    "direction": "Boil and serve spiced with spinach",
+                    "per_serving": "1.0",
+                    "user_id": 2,
+                    "created_at": "2018-04-13T22:17:29.268Z",
+                    "updated_at": "2018-04-13T23:48:20.395Z",
+                    "ingredients": [
+                        {
+                            "id": 1,
+                            "name": "Water",
+                            "created_at": "2018-04-13T22:17:29.313Z",
+                            "updated_at": "2018-04-13T22:17:29.313Z",
+                            "quantity": {
+                                "qty": "2 cups",
+                                "created_at": "2018-04-13T22:17:29.350Z",
+                                "updated_at": "2018-04-13T22:17:29.350Z",
+                                "ingredient_id": 1,
+                                "recipe_id": 1
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "name": "chilli",
+                            "created_at": "2018-04-13T22:17:29.361Z",
+                            "updated_at": "2018-04-13T22:17:29.361Z",
+                            "quantity": {
+                                "qty": "5 grammes",
+                                "created_at": "2018-04-13T22:17:29.368Z",
+                                "updated_at": "2018-04-13T22:17:29.368Z",
+                                "ingredient_id": 2,
+                                "recipe_id": 1
+                            }
+                        },
+                        {
+                            "id": 3,
+                            "name": "salt",
+                            "created_at": "2018-04-13T22:17:29.376Z",
+                            "updated_at": "2018-04-13T22:17:29.376Z",
+                            "quantity": {
+                                "qty": "2 pinches",
+                                "created_at": "2018-04-13T22:17:29.383Z",
+                                "updated_at": "2018-04-13T22:17:29.383Z",
+                                "ingredient_id": 3,
+                                "recipe_id": 1
+                            }
+                        }
+                    ]
+                }
+            }
+    
+- Response 403 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+        
+    - Body
+    
+            {
+                "status": "fail, check parameters or signin"
+            }
+            
+### Delete existing recipe [DELETE]
+Logged in user may delete recipe he initially added. Will fail for not logged
+in user.
+
+- Parameter
+
+    - recipeId: 1
+
+- Request (application/x-www-form-urlencoded)
+    
+- Response 200 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "recipe 1 removed",
+                "deleted": {
+                    "id": 1,
+                    "name": "Carribean pearls and diamond sea shells",
+                    "direction": "Boil and serve spiced with spinach",
+                    "per_serving": "1.0",
+                    "user_id": 2,
+                    "created_at": "2018-04-13T22:17:29.268Z",
+                    "updated_at": "2018-04-13T23:48:20.395Z"
+                }
+            }
+            
+- Request (application/x-www-form-urlencoded)
+    
+- Response 400 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "fail",
+                "error": "user 1 has no recipe 1"
+            }
+
+- Response 403 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "fail, signin or signup"
+            }
+        
+## Review [/{recipeId}/reviews]
+
+- Parameter
+
+    - recipeId (number) - integer ID of recipe to review
+    
+### Add review to recipe [POST]
+Logged in user may add review for any recipe. Will fail for non logged in 
+user.
+
+- Parameter
+
+    - recipeId: 1
+    
+- Request (application/x-www-form-urlencoded)
+
+        {
+            "review": "really awesome delicacy",
+            "star": 4
+        }
+    
+- Response 201 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "review added"
+            }
+            
+- Response 200 (application/json)
+
+     - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "review updated"
+            }
+        
+- Response 403 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "fail",
+                "error": "login or signup"
+            }
+            
+            
+## Favorites [/users/recipes]
+
+### Get favorites [GET]
+Logged in user may get favorite recipes ie recipes he has REVIEWED with a
+star NOT less than 3.
+
+            
+- Response 200 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            [
+                {
+                    "id": 1,
+                    "name": "Carribean pearls and diamond sea shells",
+                    "direction": "Boil and serve spiced with spinach",
+                    "per_serving": "1.0",
+                    "user_id": 1,
+                    "created_at": "2018-04-14T00:44:43.988Z",
+                    "updated_at": "2018-04-14T00:45:16.521Z"
+                }
+            ]
+            
+## Upvotes [/recipes{?sort,order}]
+
+- Parameters
+
+    - sort: 'upvotes' (required, string) - resource to sort through, 'upvotes' for 
+    this collection
+    
+    - order (string) - takes 'ascending' or 'descending'
+    
+### Get recipes with most upvotes [GET]
+Logged in user may get recipes with most upvotes to a limit of 5. These are defined as
+recipes that have the most count of positive reviews (determined by star
+values). Will fail for not logged in user.
+
+- Parameters 
+    
+    - order: 'descending'
+    
+- Response 200 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+        
+    - Body
+    
+            [
+                {
+                    "upvotes": 2,
+                    "recipe": {
+                        "id": 3,
+                        "name": "Carribean pearls and diamond sea shells",
+                        "direction": "Boil and serve spiced with spinach",
+                        "per_serving": "1.0",
+                        "user_id": 1,
+                        "created_at": "2018-04-14T00:44:43.988Z",
+                        "updated_at": "2018-04-14T00:45:16.521Z"
+                    }
+                },
+                {
+                    "upvotes": 1,
+                    "recipe": {
+                        "id": 4,
+                        "name": "To die for pot roast",
+                        "direction": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        "per_serving": "1.0",
+                        "user_id": 2,
+                        "created_at": "2018-04-14T02:07:41.537Z",
+                        "updated_at": "2018-04-14T02:07:41.560Z"
+                    }
+                }
+            ]
+            
+            
+- Response 403 (application/json)
+
+    - Headers
+    
+            X-Powered-By: Express
+            
+    - Body
+    
+            {
+                "status": "fail",
+                "error": "signin or signup"
+            }
