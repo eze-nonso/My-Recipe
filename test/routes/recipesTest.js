@@ -1,3 +1,5 @@
+// eslint-disable no-unused-expressions
+
 import 'colors';
 import { chai, app, expect, assert, populateDB } from '../common';
 import { recipe as Recipe } from '../../server/models';
