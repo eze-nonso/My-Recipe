@@ -23,11 +23,11 @@ const router = express.Router();
 
 app
   .use(urlParser)
-  .all('/api', (req, res) => {
+  .all('/api', (req, res) => ({
     return res.send({
       message: 'This is the Projekt-blue api'
     })
-  })
+  }))
   .use('/api', router)
   .all('/', (req, res) => {
     return res.send({
