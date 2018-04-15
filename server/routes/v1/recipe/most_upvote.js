@@ -1,4 +1,4 @@
-import { mostUpvote } from '../../controllers';
+import { mostUpvote } from '../../../controllers';
 
 // implement such functions in ../../middlewares
 const checkQuery = (req, res, next) => {
