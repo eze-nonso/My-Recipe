@@ -1,4 +1,4 @@
-import { createUser as create } from '../../controllers';
+import { createUser as create } from '../../../controllers';
 
 // implement such in ../../middlewares || expressvalidator
 const blockNull = (req, res, next) => {
