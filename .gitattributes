@@ -1,3 +1,4 @@
 .travis.yml merge=master
 README.md merge=master
 apiary.apib merge=master
+.env merge=master
