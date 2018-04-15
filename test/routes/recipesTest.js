@@ -1,4 +1,4 @@
-// eslint-disable no-unused-expressions
+/* eslint-disable no-unused-expressions */
 
 import 'colors';
 import { chai, app, expect, assert, populateDB } from '../common';
