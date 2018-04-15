@@ -18,3 +18,11 @@ templates/
 # exclude coverage directory
 
 coverage/
+
+# exclude docfile
+
+apiary.apib
+
+# exclude Procfile
+
+Procfile

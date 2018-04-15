@@ -1,4 +1,4 @@
-import { getRecipe } from '../../controllers';
+import { getRecipe } from '../../../controllers';
 
 export default app =>
   app.get(
