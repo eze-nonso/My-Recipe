@@ -1,4 +1,4 @@
-import { getFavRecipe } from '../../controllers';
+import { getFavRecipe } from '../../../controllers';
 
 const validUser = (req, res, next) => {
   if (req.session.user) {

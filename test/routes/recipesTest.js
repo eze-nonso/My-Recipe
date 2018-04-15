@@ -1,4 +1,4 @@
-// eslint-disable no-unused-expressions
+/* eslint-disable no-unused-expressions */
 
 import 'colors';
 import { chai, app, expect, assert, populateDB } from '../common';
@@ -7,11 +7,11 @@ import { recipe as Recipe } from '../../server/models';
 
 const requester = chai.request(app);
 const agent = chai.request.agent(app);
-
+const version = process.env.VERSION;
 
 suite('Adding recipe', () => {
-  suite('POST /api/recipes. Logged in user should be able to add recipe', () => {
-    test('Should fail for user not logged in', () => requester.post('/api/recipes')
+  suite(`POST /api/${version}/recipes. Logged in user should be able to add recipe`, () => {
+    test('Should fail for user not logged in', () => requester.post(`/api/${version}/recipes`)
       .type('form')
       .send({
         name: 'Molokov Cocktail',
@@ -60,11 +60,11 @@ suite('Adding recipe', () => {
 });
 
 suite('Modifying recipe', () => {
-  suite('PUT /api/recipes/<recipeId>', () => {
+  suite(`PUT /api/${version}/recipes/<recipeId>`, () => {
     test('Should respond with a success message along with summary of updated recipe for logged in user', () => populateDB(agent)
       .then(res =>
         res.body.recipe.id)
-      .then(id => agent.put(`/api/recipes/${id}`)
+      .then(id => agent.put(`/api/${version}/recipes/${id}`)
         .type('form')
         .send({
           name: 'Quinox2',
@@ -85,13 +85,13 @@ suite('Modifying recipe', () => {
 });
 
 suite('Deleting recipe', () => {
-  suite('DELETE /api/recipes/<recipeId>', () => {
+  suite(`DELETE /api/${version}/recipes/<recipeId>`, () => {
     test('Should delete single recipe and return summary of deleted recipe', () => Recipe.all()
       .then(recipes => populateDB(agent)
         .then(res => res.body.recipe.id)
         .then(id =>
           Promise.all([
-            agent.delete(`/api/recipes/${id}`),
+            agent.delete(`/api/${version}/recipes/${id}`),
             id
           ]))
         .then(([res, id]) => {
@@ -121,7 +121,7 @@ suite('Deleting recipe', () => {
         ]))
       .then(([count, id]) =>
         // use requester here as agent is cached
-        requester.delete(`/api/recipes/${id}`)
+        requester.delete(`/api/${version}/recipes/${id}`)
           .then((res) => {
             assert.fail(res.status, 403, 'Expected an error code on request by not logged in user');
           })
@@ -149,10 +149,10 @@ suite('Deleting recipe', () => {
 
 
 suite('Get all recipes', () => {
-  suite('GET /api/recipes', () => {
+  suite(`GET /api/${version}/recipes`, () => {
     test('Logged in user should get all recipes with a success status code', () => populateDB(agent)
       .then(() =>
-        agent.get('/api/recipes'))
+        agent.get(`/api/${version}/recipes`))
       .then((res) => {
         expect(res).to.be.json;
         expect(res).to.have.status(200);
@@ -161,7 +161,7 @@ suite('Get all recipes', () => {
         expect(res.body[0]).to.have.own.property('reviews');
       }));
 
-    test('Should fail for user not logged in with error status code', () => requester.get('/api/recipes')
+    test('Should fail for user not logged in with error status code', () => requester.get(`/api/${version}/recipes`)
       .then((res) => {
         assert.fail(res.status, 403, 'Expected an error status code for request from user not logged in');
       })
@@ -184,10 +184,10 @@ suite('Get all recipes', () => {
 
 
 suite('Post review for recipe', () => {
-  suite('POST /api/recipes/<recipeId>/reviews', () => {
+  suite(`POST /api/${version}/recipes/<recipeId>/reviews`, () => {
     test('Expect empty review body to return error response', () => populateDB(agent)
       .then(res => res.body.recipe.id)
-      .then(recipeId => agent.post(`/api/recipes/${recipeId}/reviews`)
+      .then(recipeId => agent.post(`/api/${version}/recipes/${recipeId}/reviews`)
         .type('form')
         .send({
           review: '',
@@ -208,7 +208,7 @@ suite('Post review for recipe', () => {
 
     test('Expect add review to fail with error response code for user not logged in', () => populateDB(agent)
       .then(res => res.body.recipe.id)
-      .then(recipeId => requester.post(`/api/recipes/${recipeId}/reviews`)
+      .then(recipeId => requester.post(`/api/${version}/recipes/${recipeId}/reviews`)
         .type('form')
         .send({
           review: 'sunt praesentium sit',
@@ -232,7 +232,7 @@ suite('Post review for recipe', () => {
     test('Expect success response on new review', () => populateDB(agent)
       .then(res => res.body.recipe.id)
       .then(recipeId =>
-        agent.post(`/api/recipes/${recipeId}/reviews`)
+        agent.post(`/api/${version}/recipes/${recipeId}/reviews`)
           .type('form')
           .send({
             review: 'Lorem ipsum deut',
@@ -248,11 +248,11 @@ suite('Post review for recipe', () => {
 
 
 suite('Get favorite recipe', () => {
-  suite('GET /api/users/recipes', () => {
+  suite(`GET /api/${version}/users/recipes`, () => {
     test('Expect logged in user to get favorite recipes', () =>
 
       // agent cached cookie from last call
-      agent.get('/api/users/recipes')
+      agent.get(`/api/${version}/users/recipes`)
         .then((res) => {
           expect(res).to.be.json;
           expect(res).to.have.status(200);
@@ -260,7 +260,7 @@ suite('Get favorite recipe', () => {
           expect(res.body).to.be.empty;
         }));
 
-    test('Expect error response on request by user not logged in', () => requester.get('/api/users/recipes')
+    test('Expect error response on request by user not logged in', () => requester.get(`/api/${version}/users/recipes`)
       .then((res) => {
         expect.fail(res.status, 403, 'Expected error response code');
       })
@@ -280,8 +280,8 @@ suite('Get favorite recipe', () => {
 
 
 suite('Get recipes with the most upvotes', () => {
-  suite('GET /api/recipes?sort=upvotes&order=ascending', () => {
-    test('Expect to respond with error status code for user not logged in', () => requester.get('/api/recipes?sort=upvotes&order=ascending')
+  suite(`GET /api/${version}/recipes?sort=upvotes&order=ascending`, () => {
+    test('Expect to respond with error status code for user not logged in', () => requester.get(`/api/${version}/recipes?sort=upvotes&order=ascending`)
       .then((res) => {
         expect.fail(res.status, 403, 'Expected error status code on request by user not logged in');
       })
@@ -300,7 +300,7 @@ suite('Get recipes with the most upvotes', () => {
 
 
     test('Expect success on request by logged in user', () => populateDB(agent)
-      .then(() => agent.get('/api/recipes?sort=upvotes&order=ascending'))
+      .then(() => agent.get(`/api/${version}/recipes?sort=upvotes&order=ascending`))
       .then((res) => {
         expect(res).to.be.json;
         expect(res).to.have.status(200);
@@ -314,7 +314,7 @@ suite('Get recipes with the most upvotes', () => {
       }));
 
     test('Expect returned most upvotes to be in descending order', () => populateDB(agent)
-      .then(() => agent.get('/api/recipes?sort=upvotes&order=descending'))
+      .then(() => agent.get(`/api/${version}/recipes?sort=upvotes&order=descending`))
       .then((res) => {
         expect(res).to.be.json;
         expect(res).status(200);
