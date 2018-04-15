@@ -1,11 +1,14 @@
+/* eslint-disable no-unused-expressions */
+
 import 'colors';
 import { chai, app, expect, assert, } from '../common';
 
 const requester = chai.request(app);
+const version = process.env.VERSION;
 
 suite('User signup and login', () => {
-  suite('POST /api/users/signup - user signup', () => {
-    test('should create user "newUser" in database with complete credentials', () => requester.post('/api/users/signup')
+  suite(`POST /api/${version}/users/signup - user signup`, () => {
+    test('should create user "newUser" in database with complete credentials', () => requester.post(`/api/${version}/users/signup`)
       .type('form')
       .send({
         username: 'newUser',
@@ -25,7 +28,7 @@ suite('User signup and login', () => {
       }));
 
     suite('Should fail to create account where credentials are missing or invalid', () => {
-      test('Expect fail when missing credentials', () => requester.post('/api/users/signup')
+      test('Expect fail when missing credentials', () => requester.post(`/api/${version}/users/signup`)
         .type('form')
         .send({
           username: 'justThis'
@@ -50,8 +53,8 @@ suite('User signup and login', () => {
     });
   });
 
-  suite('POST /api/users/signin', () => {
-    test('Should login newly created user', () => requester.post('/api/users/signup')
+  suite(`POST /api/${version}/users/signin`, () => {
+    test('Should login newly created user', () => requester.post(`/api/${version}/users/signup`)
       .type('form')
       .send({
         username: 'newUser',
@@ -59,7 +62,7 @@ suite('User signup and login', () => {
         email: 'newUser@newSite.com'
       })
       .then(() =>
-        requester.post('/api/users/signin')
+        requester.post(`/api/${version}/users/signin`)
           .type('form')
           .send({
             email: 'newUser@newSite.com',
@@ -71,7 +74,7 @@ suite('User signup and login', () => {
         res.body.should.have.property('account');
       }));
 
-    test('Should fail on wrong user credentials', () => requester.post('/api/users/signin')
+    test('Should fail on wrong user credentials', () => requester.post(`/api/${version}/users/signin`)
       .type('form')
       .send({
         username: 'dontExist',

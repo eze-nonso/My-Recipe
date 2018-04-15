@@ -12,6 +12,7 @@ chai.use(chaiHttp);
 chai.should();
 const { expect } = chai;
 const { assert } = chai;
+const version = process.env.VERSION;
 
 const umzugMigrate = new Umzug({
   logging: false,
@@ -52,7 +53,7 @@ const umzugSeed = new Umzug({
 function populateDB(agent) {
   // should always take agent as arg, to resend coookie on create recipe
 
-  return agent.post('/api/users/signup')
+  return agent.post(`/api/${version}/users/signup`)
     .type('form')
     .send({
       username: faker.internet.userName(),
@@ -60,7 +61,7 @@ function populateDB(agent) {
       password: faker.internet.password(),
     })
     .then(() =>
-      agent.post('/api/recipes')
+      agent.post(`/api/${version}/recipes`)
         .type('form')
         .send({
           name: faker.lorem.word(),
